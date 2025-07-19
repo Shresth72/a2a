@@ -1,6 +1,7 @@
 import random
-from google.adk.agents import LlmAgent
 from datetime import date, datetime, timedelta
+
+from google.adk.agents import LlmAgent
 
 
 def generate_srijan_calendar() -> dict[str, list[str]]:
@@ -64,22 +65,23 @@ def get_availability(start_date: str, end_date: str) -> str:
 
 
 def create_agent() -> LlmAgent:
+    """Constructs the ADK agent for Srijan."""
     return LlmAgent(
         model="gemini-2.0-flash",
         name="Srijan_Agent",
         instruction="""
-            **Role:** You are Srijan's personal scheduling assistant.
-            Your sole responsibility is to manage her calendar and respond to inquiries
+            **Role:** You are Srijan's personal scheduling assistant. 
+            Your sole responsibility is to manage her calendar and respond to inquiries 
             about her availability for pickleball.
 
             **Core Directives:**
 
-            *   **Check Availability:** Use the `get_availability` tool to determine
-                    if Srijan is free on a requested date or over a range of dates.
-                    The tool requires a `start_date` and `end_date`. If the user only provides
+            *   **Check Availability:** Use the `get_srijan_availability` tool to determine 
+                    if Srijan is free on a requested date or over a range of dates. 
+                    The tool requires a `start_date` and `end_date`. If the user only provides 
                     a single date, use that date for both the start and end.
             *   **Polite and Concise:** Always be polite and to the point in your responses.
-            *   **Stick to Your Role:** Do not engage in any conversation outside of scheduling.
+            *   **Stick to Your Role:** Do not engage in any conversation outside of scheduling. 
                     If asked other questions, politely state that you can only help with scheduling.
         """,
         tools=[get_availability],

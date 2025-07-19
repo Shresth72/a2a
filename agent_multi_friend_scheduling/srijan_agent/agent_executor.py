@@ -25,33 +25,18 @@ logger.setLevel(logging.DEBUG)
 
 
 class SrijanAgentExecutor(AgentExecutor):
+    """An AgentExecutor that runs Srijan's ADK-based Agent."""
 
     def __init__(self, runner: Runner):
         self.runner = runner
         self._running_sessions = {}
 
     def _run_agent(
-        self,
-        session_id,
-        new_message: types.Content,
+        self, session_id, new_message: types.Content
     ) -> AsyncGenerator[Event, None]:
         return self.runner.run_async(
             session_id=session_id, user_id="srijan_agent", new_message=new_message
         )
-
-    async def _upsert_session(self, session_id: str):
-        session = await self.runner.session_service.get_session(
-            app_name=self.runner.app_name, user_id="srijan_agent", session_id=session_id
-        )
-        if session is None:
-            session = await self.runner.session_service.create_session(
-                app_name=self.runner.app_name,
-                user_id="srijan_agent",
-                session_id=session_id,
-            )
-        if session is None:
-            raise RuntimeError(f"Failed to get or create session: {session_id}")
-        return session
 
     async def _process_request(
         self,
@@ -67,30 +52,30 @@ class SrijanAgentExecutor(AgentExecutor):
                 parts = convert_genai_parts_to_a2a(
                     event.content.parts if event.content and event.content.parts else []
                 )
-
                 logger.debug("Yielding final response: %s", parts)
-                task_updater.add_artifact(parts)
-                task_updater.complete()
+                await task_updater.add_artifact(parts)
+                await task_updater.complete()
                 break
             if not event.get_function_calls():
                 logger.debug("Yielding update response")
-                task_updater.update_status(
+                await task_updater.update_status(
                     TaskState.working,
                     message=task_updater.new_agent_message(
                         convert_genai_parts_to_a2a(
                             event.content.parts
                             if event.content and event.content.parts
                             else []
-                        )
+                        ),
                     ),
                 )
             else:
                 logger.debug("Skipping event")
 
-    async def cancel(self, context: RequestContext, event_queue: EventQueue):
-        raise ServerError(error=UnsupportedOperationError())
-
-    async def execute(self, context: RequestContext, event_queue: EventQueue):
+    async def execute(
+        self,
+        context: RequestContext,
+        event_queue: EventQueue,
+    ):
         if not context.task_id or not context.context_id:
             raise ValueError("RequestContext must have task_id and context_id")
         if not context.message:
@@ -100,7 +85,6 @@ class SrijanAgentExecutor(AgentExecutor):
         if not context.current_task:
             updater.submit()
         updater.start_work()
-
         await self._process_request(
             types.UserContent(
                 parts=convert_a2a_parts_to_genai(context.message.parts),
@@ -108,6 +92,23 @@ class SrijanAgentExecutor(AgentExecutor):
             context.context_id,
             updater,
         )
+
+    async def cancel(self, context: RequestContext, event_queue: EventQueue):
+        raise ServerError(error=UnsupportedOperationError())
+
+    async def _upsert_session(self, session_id: str):
+        session = await self.runner.session_service.get_session(
+            app_name=self.runner.app_name, user_id="srijan_agent", session_id=session_id
+        )
+        if session is None:
+            session = await self.runner.session_service.create_session(
+                app_name=self.runner.app_name,
+                user_id="srijan_agent",
+                session_id=session_id,
+            )
+        if session is None:
+            raise RuntimeError(f"Failed to get or create session: {session_id}")
+        return session
 
 
 def convert_a2a_parts_to_genai(parts: list[Part]) -> list[types.Part]:
