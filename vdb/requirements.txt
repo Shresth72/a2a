@@ -1,0 +1,4 @@
+weaviate-client
+pandas
+python-dotenv
+streamlit
