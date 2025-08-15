@@ -1,0 +1,802 @@
+[
+  {
+    "title": "Celestial Canvas",
+    "description": "A painter realizes that whatever he depicts on his canvas becomes a real star or constellation in the night sky.",
+    "rating": 4.9,
+    "movie_id": 10,
+    "year": 1963,
+    "director": "Sergio Romano"
+  },
+  {
+    "title": "Solaris Ascendant",
+    "description": "Set in a distant future where advanced technology and mystical forces collide, Solaris Ascendant follows a rogue technomancer's quest to uncover a hidden truth.",
+    "rating": 4.4,
+    "movie_id": 85,
+    "year": 1993,
+    "director": "Lucas Miller"
+  },
+  {
+    "title": "The Clock Tower's Secret",
+    "description": "Fantasy tale of a small town where time stops at midnight, leading a young boy on a quest to uncover the truth.",
+    "rating": 4.8,
+    "movie_id": 95,
+    "year": 1979,
+    "director": "Wilhelm Fischer"
+  },
+  {
+    "title": "Moonlit Melodies",
+    "description": "A talented street musician discovers a magical instrument that plays tunes based on the moon's phases.",
+    "rating": 4.5,
+    "movie_id": 59,
+    "year": 1969,
+    "director": "Clara Fernandez"
+  },
+  {
+    "title": "Timekeeper",
+    "description": "A clockmaker discovers his creations can manipulate time, for better or worse.",
+    "rating": 3.6,
+    "movie_id": 110,
+    "year": 1980,
+    "director": "Rachel Adams"
+  },
+  {
+    "title": "Neon Horizon",
+    "description": "A taxi driver in a futuristic city gets caught up in a political conspiracy.",
+    "rating": 3.7,
+    "movie_id": 60,
+    "year": 1981,
+    "director": "Clara White"
+  },
+  {
+    "title": "Odyssey of the Obsidian",
+    "description": "An archaeologist unearths an obsidian mirror, embarking on a journey across ancient civilizations and their forgotten tales.",
+    "rating": 4.7,
+    "movie_id": 63,
+    "year": 2019,
+    "director": "Hanna Olsson"
+  },
+  {
+    "title": "Skyward Ascent",
+    "description": "A young woman dreams of becoming an astronaut in a society that forbids it.",
+    "rating": 4.5,
+    "year": 1977,
+    "movie_id": 83,
+    "director": "Mary Thompson"
+  },
+  {
+    "title": "Moonlight Sonata",
+    "description": "A pianist loses her hearing but discovers a new way to experience music.",
+    "rating": 4.5,
+    "movie_id": 58,
+    "year": 1994,
+    "director": "Emily Clark"
+  },
+  {
+    "title": "Echoes of Elara",
+    "description": "A young musician discovers a magical instrument that transports her to a mystical realm of song and dance.",
+    "rating": 4.9,
+    "movie_id": 22,
+    "year": 2014,
+    "director": "Siti Abdullah"
+  },
+  {
+    "title": "City of Ciphers",
+    "description": "In a dystopian future, a cryptographer discovers a series of coded messages that could unravel the secrets of their society or plunge it into chaos.",
+    "rating": 4.6,
+    "movie_id": 14,
+    "year": 1963,
+    "director": "Marcus Johnson"
+  },
+  {
+    "title": "Silent Embrace",
+    "description": "A tender and poignant drama about an artist who, after losing her hearing, finds new ways to express herself and connect with others through her work.",
+    "rating": 4.3,
+    "movie_id": 80,
+    "year": 2018,
+    "director": "Grace Thompson"
+  },
+  {
+    "title": "Panda-monium",
+    "description": "Animated kid's film about a panda with dreams of becoming a top chef despite the odds.",
+    "rating": 4.7,
+    "year": 2008,
+    "movie_id": 64,
+    "director": "Han Lee"
+  },
+  {
+    "title": "Love in Venice",
+    "description": "A romantic drama set against the backdrop of the picturesque canals of Venice, where two strangers find love in the most unexpected way.",
+    "rating": 4.2,
+    "movie_id": 48,
+    "year": 1989,
+    "director": "Sophia Anderson"
+  },
+  {
+    "title": "Woven in Time",
+    "description": "A tapestry artist unravels her family’s hidden history while crafting her masterpiece.",
+    "rating": 4.0,
+    "movie_id": 119,
+    "year": 2007,
+    "director": "Lisa Williams"
+  },
+  {
+    "title": "Ocean's Echo",
+    "description": "A heartwarming tale of a young girl who befriends a mystical sea creature on the shores of Ireland.",
+    "rating": 4.5,
+    "movie_id": 62,
+    "year": 1980,
+    "director": "Saoirse O'Connell"
+  },
+  {
+    "title": "Spice & Ice",
+    "description": "A romantic comedy set in Antarctica, where a chef and a scientist discover love in the most unlikely place.",
+    "rating": 3.9,
+    "movie_id": 88,
+    "year": 2006,
+    "director": "Isabella Rodrigues"
+  },
+  {
+    "title": "Pioneers of the Sky",
+    "description": "The first colonists on Mars face unforeseen challenges and existential dilemmas.",
+    "rating": 4.5,
+    "year": 1967,
+    "movie_id": 68,
+    "director": "Tom Grant"
+  },
+  {
+    "title": "Paradoxical Parchment",
+    "description": "An ancient scroll grants its reader the power to rewrite history, but with unpredictable and comical outcomes.",
+    "rating": 4.8,
+    "movie_id": 66,
+    "year": 1988,
+    "director": "Dara O'Reilly"
+  },
+  {
+    "title": "Cosmic Canines",
+    "description": "An animated tale of dogs from different planets uniting to save the galaxy from a feline villain.",
+    "rating": 4.5,
+    "movie_id": 15,
+    "year": 1985,
+    "director": "Kwame Agyeman"
+  },
+  {
+    "title": "Echoes in the Glass",
+    "description": "A bartender experiences the same day over and over until he realizes the key to break the cycle.",
+    "rating": 4.1,
+    "movie_id": 21,
+    "year": 1980,
+    "director": "Carl Johnson"
+  },
+  {
+    "title": "Tango in Time",
+    "description": "Two rival dancers find a pair of shoes that transport them to significant moments in history, challenging their artistry.",
+    "rating": 4.6,
+    "year": 1971,
+    "movie_id": 92,
+    "director": "Lucía Gutierrez"
+  },
+  {
+    "title": "Whispering Pines",
+    "description": "A family discovers that their new home is alive with memories of its past owners, leading to magical adventures.",
+    "rating": 4.6,
+    "movie_id": 115,
+    "year": 1973,
+    "director": "Noor Ahmed"
+  },
+  {
+    "title": "Fables from the Fountain",
+    "description": "Every night, a city's central fountain comes alive, narrating tales of its historical witnesses and adventures.",
+    "rating": 4.9,
+    "movie_id": 28,
+    "year": 1973,
+    "director": "Sofia Navarro"
+  },
+  {
+    "title": "Vistas of Valor",
+    "description": "A photographer captures unseen moments of bravery during wartime, revealing untold stories of heroes.",
+    "rating": 4.7,
+    "movie_id": 112,
+    "year": 1960,
+    "director": "Leila Boutros"
+  },
+  {
+    "title": "Freeze Frames",
+    "description": "An amateur photographer discovers his camera can freeze time but struggles to control its chaotic consequences.",
+    "rating": 4.5,
+    "movie_id": 33,
+    "year": 2004,
+    "director": "Katya Ivanova"
+  },
+  {
+    "title": "Digital Soul",
+    "description": "A programmer creates an AI that starts questioning its own existence.",
+    "rating": 3.5,
+    "movie_id": 19,
+    "year": 1995,
+    "director": "Tim Moore"
+  },
+  {
+    "title": "Lost in Laughter",
+    "description": "A comedy about a comedian who, after a memory loss incident, has to relearn why he loved making people laugh.",
+    "rating": 3.9,
+    "movie_id": 45,
+    "year": 1989,
+    "director": "Hamza Al-Sabah"
+  },
+  {
+    "title": "Love Beyond Codes",
+    "description": "Two AI robots fall in love, creating chaos and comedy in their tech world.",
+    "rating": 4.5,
+    "movie_id": 46,
+    "year": 1997,
+    "director": "Hiroshi Nakamura"
+  },
+  {
+    "title": "Shadows in the Spotlight",
+    "description": "A drama about a famous actress and her body double, whose lives intertwine in unexpected ways.",
+    "rating": 4.6,
+    "year": 2010,
+    "movie_id": 79,
+    "director": "Arjun Patil"
+  },
+  {
+    "title": "The Final Page",
+    "description": "A group of friends find a mysterious book that brings their darkest secrets to life.",
+    "rating": 3.2,
+    "movie_id": 98,
+    "year": 1968,
+    "director": "Sarah Johnson"
+  },
+  {
+    "title": "Fractured Minds",
+    "description": "A psychologist enters the dreams of her patients to cure them but risks losing herself.",
+    "rating": 4.8,
+    "movie_id": 32,
+    "year": 2005,
+    "director": "Omar Malik"
+  },
+  {
+    "title": "The Great Cupcake Caper",
+    "description": "Animated tale of desserts coming to life in a bakery, embarking on a mission to save their home from closure.",
+    "rating": 4.7,
+    "movie_id": 100,
+    "year": 2008,
+    "director": "Emeka Okafor"
+  },
+  {
+    "title": "Temporal Tides",
+    "description": "A sailor lost at sea finds a mystical island where time behaves differently, leading to decades of adventures in days.",
+    "rating": 4.7,
+    "year": 1966,
+    "movie_id": 93,
+    "director": "Wei Liu"
+  },
+  {
+    "title": "Tickles of the Timekeeper",
+    "description": "A town clock decides who ages and who doesn't, leading to comic uproar when it develops a mischievous mind.",
+    "rating": 4.5,
+    "movie_id": 109,
+    "year": 2015,
+    "director": "Fatima Al-Mansur"
+  },
+  {
+    "title": "Stellar Horizon",
+    "description": "Set in the year 2200, Stellar Horizon follows a crew of astronauts on a daring mission to explore a distant galaxy and uncover its hidden mysteries.",
+    "rating": 4.6,
+    "movie_id": 90,
+    "year": 1977,
+    "director": "Robert West"
+  },
+  {
+    "title": "Neon Nomads",
+    "description": "In a futuristic cityscape, a group of nomads seek the last source of natural light amidst a neon-dominated world.",
+    "rating": 4.8,
+    "year": 1991,
+    "movie_id": 61,
+    "director": "Stefan Müller"
+  },
+  {
+    "title": "Marigold's Menagerie",
+    "description": "In a magical garden, Marigold befriends fantastical creatures, but when their haven is threatened, they band together.",
+    "rating": 4.9,
+    "movie_id": 50,
+    "year": 2008,
+    "director": "Kwame Acheampong"
+  },
+  {
+    "title": "Ballet & Bullets",
+    "description": "An unexpected crime comedy about a mob boss who enrolls in a ballet class as a disguise.",
+    "rating": 4.1,
+    "movie_id": 2,
+    "year": 1995,
+    "director": "Olga Ivanov"
+  },
+  {
+    "title": "Echoes of Eternity",
+    "description": "A sweeping historical drama that spans generations, following the lives and loves of a family against the backdrop of pivotal moments in history.",
+    "rating": 4.6,
+    "movie_id": 23,
+    "year": 2003,
+    "director": "Thomas Mitchell"
+  },
+  {
+    "title": "Chuckle Chase",
+    "description": "Two rival detectives are forced to work together on a case, leading to hilarious consequences.",
+    "rating": 4.0,
+    "movie_id": 12,
+    "year": 1987,
+    "director": "Anneke Van Dijk"
+  },
+  {
+    "title": "Serenades of the Sahara",
+    "description": "An anthropologist stumbles upon a desert tribe with a unique musical language, altering her life's direction.",
+    "rating": 4.8,
+    "movie_id": 77,
+    "year": 1987,
+    "director": "Aisha Al-Mansoor"
+  },
+  {
+    "title": "The 13th Day",
+    "description": "A team of soldiers must survive in a haunted battleground for 13 days.",
+    "rating": 2.9,
+    "movie_id": 94,
+    "year": 1974,
+    "director": "Victor Hughes"
+  },
+  {
+    "title": "Flight of the Phoenix",
+    "description": "A young girl discovers she can communicate with birds and must save her town from an impending disaster.",
+    "rating": 4.8,
+    "year": 2008,
+    "movie_id": 30,
+    "director": "Jack Davis"
+  },
+  {
+    "title": "Robot's Day Out",
+    "description": "Animated film about a robot who decides to explore the world after its owner forgets to turn it off.",
+    "rating": 4.3,
+    "movie_id": 75,
+    "year": 1987,
+    "director": "Chika Okoye"
+  },
+  {
+    "title": "Whispers in the Wind",
+    "description": "A haunting supernatural mystery where a small town grapples with strange occurrences linked to a forgotten tragedy.",
+    "rating": 4.3,
+    "movie_id": 116,
+    "year": 1998,
+    "director": "Olivia Roberts"
+  },
+  {
+    "title": "Midnight Masquerade",
+    "description": "In a world where magic is real, a masquerade ball becomes the backdrop for a tale of love, intrigue, and unexpected enchantments.",
+    "rating": 4.3,
+    "movie_id": 54,
+    "year": 1980,
+    "director": "Isabella Martinez"
+  },
+  {
+    "title": "War of the Wolves",
+    "description": "Two rival wolf packs fight for control of their forest, told through the perspective of the animals.",
+    "rating": 4.0,
+    "movie_id": 114,
+    "year": 1982,
+    "director": "Lisa Kim"
+  },
+  {
+    "title": "Dreams of the Dunes",
+    "description": "An epic adventure of a desert nomad searching for a mythical oasis to save his village.",
+    "rating": 4.6,
+    "movie_id": 20,
+    "year": 1960,
+    "director": "Youssef El Masri"
+  },
+  {
+    "title": "Melodies of the Moon",
+    "description": "An alien musician finds himself on Earth, discovering the universal language of music and love.",
+    "rating": 4.5,
+    "year": 2018,
+    "movie_id": 52,
+    "director": "Connor O'Sullivan"
+  },
+  {
+    "title": "Silhouettes in the Sand",
+    "description": "Amidst desert dunes, a girl discovers shadows that come alive at night, dancing tales of the land and its legends.",
+    "rating": 4.8,
+    "movie_id": 82,
+    "year": 1993,
+    "director": "Aria Khosravi"
+  },
+  {
+    "title": "Infernal Playground",
+    "description": "Demons and angels battle it out in modern-day New York, but not all is as it seems.",
+    "rating": 2.5,
+    "movie_id": 40,
+    "year": 1997,
+    "director": "Kathy Roberts"
+  },
+  {
+    "title": "Arctic Chuckles",
+    "description": "Penguins trying stand-up comedy to uplift spirits in the cold winter.",
+    "rating": 4.0,
+    "movie_id": 0,
+    "year": 1974,
+    "director": "Sofia Mendoza"
+  },
+  {
+    "title": "The Forest's Echo",
+    "description": "Children embark on an adventure to find a mythical creature whose voice can heal their ailing forest.",
+    "rating": 5.0,
+    "movie_id": 99,
+    "year": 2009,
+    "director": "Olumide Adebayo"
+  },
+  {
+    "title": "Beneath Northern Lights",
+    "description": "An arctic explorer finds a hidden village where the aurora borealis has magical powers.",
+    "rating": 4.6,
+    "movie_id": 4,
+    "year": 1988,
+    "director": "Magnus Olsson"
+  },
+  {
+    "title": "Window to the Past",
+    "description": "An elderly woman revisits her past via a magical window but has to make a difficult choice.",
+    "rating": 4.1,
+    "movie_id": 118,
+    "year": 1979,
+    "director": "Angela Kim"
+  },
+  {
+    "title": "Robo's First Laugh",
+    "description": "An AI designed for serious tasks starts experiencing humor, leading to unexpected and comical situations.",
+    "rating": 4.2,
+    "movie_id": 74,
+    "year": 1968,
+    "director": "Marco Bianchi"
+  },
+  {
+    "title": "The Last Page",
+    "description": "Mystery about a librarian who discovers that the last pages of every book predict the future of its reader.",
+    "rating": 4.2,
+    "movie_id": 102,
+    "year": 1992,
+    "director": "Ingrid Nyborg"
+  },
+  {
+    "title": "Whispers of Willow",
+    "description": "A sentient willow tree, ancient and wise, shares tales of love, loss, and life with those who seek its shade.",
+    "rating": 4.9,
+    "movie_id": 117,
+    "year": 1985,
+    "director": "Rani Kapoor"
+  },
+  {
+    "title": "The Monsoon Painter",
+    "description": "A young artist finds inspiration in the rains, painting landscapes that come alive with magic.",
+    "rating": 4.8,
+    "movie_id": 103,
+    "year": 1961,
+    "director": "Anaya Desai"
+  },
+  {
+    "title": "Labyrinth of Letters",
+    "description": "A postman discovers a hidden town where letters come alive, each with stories yearning to be delivered.",
+    "rating": 4.6,
+    "year": 1984,
+    "movie_id": 42,
+    "director": "Ahmed Basheer"
+  },
+  {
+    "title": "Love in Binary",
+    "description": "Two engineers find love while developing a groundbreaking communication technology.",
+    "rating": 4.6,
+    "movie_id": 47,
+    "year": 1970,
+    "director": "Karen Lee"
+  },
+  {
+    "title": "Chasing Echoes",
+    "description": "An investigative journalist uncovers a conspiracy that affects the fabric of time itself.",
+    "rating": 4.7,
+    "movie_id": 11,
+    "year": 1971,
+    "director": "Robert Smith"
+  },
+  {
+    "title": "Quantum Nexus",
+    "description": "A mind-bending thriller about a scientist who discovers a way to enter alternate realities, but soon realizes the consequences are dire.",
+    "rating": 4.7,
+    "year": 1964,
+    "movie_id": 70,
+    "director": "Michael Blackwood"
+  },
+  {
+    "title": "Shadows in the Mist",
+    "description": "A lighthouse keeper finds strange occurrences happening during a week of dense fog.",
+    "rating": 3.4,
+    "movie_id": 78,
+    "year": 2023,
+    "director": "Alice Young"
+  },
+  {
+    "title": "Galactic Odyssey",
+    "description": "In a future where humanity has colonized distant planets, a space explorer embarks on a perilous journey to save Earth from an alien threat.",
+    "rating": 4.5,
+    "movie_id": 36,
+    "year": 2018,
+    "director": "Alex Mercer"
+  },
+  {
+    "title": "Mango Mischief",
+    "description": "A comedy where a tropical island's fate rests on a single mango tree, leading to hilarious antics among its residents.",
+    "rating": 3.8,
+    "movie_id": 49,
+    "year": 1972,
+    "director": "Mateo Ruiz"
+  },
+  {
+    "title": "Forest Whispers",
+    "description": "Animated tale of forest animals uniting against an impending urbanization threat.",
+    "rating": 4.8,
+    "movie_id": 31,
+    "year": 1972,
+    "director": "Hiroshi Nakamura"
+  },
+  {
+    "title": "Circle of Thieves",
+    "description": "A group of childhood friends reunites for a heist, only to realize they're being set up.",
+    "rating": 4.6,
+    "year": 1989,
+    "movie_id": 13,
+    "director": "Frank Miller"
+  },
+  {
+    "title": "Glittering Gossamer Galaxy",
+    "description": "In a universe where stars are spun from silk, a weaver dreams of crafting the brightest constellation to guide lost souls home.",
+    "rating": 4.6,
+    "movie_id": 38,
+    "year": 2008,
+    "director": "Carlos Ortega"
+  },
+  {
+    "title": "Midnight Mirage",
+    "description": "A neo-noir mystery centered around a detective who gets entangled in a web of deception and danger as he investigates a high-profile murder.",
+    "rating": 4.4,
+    "movie_id": 56,
+    "year": 2005,
+    "director": "Jessica Williams"
+  },
+  {
+    "title": "Bazaar of Bewildering Bees",
+    "description": "A beekeeper discovers her bees produce honey that lets consumers relive memories, leading to sweet chaos.",
+    "rating": 4.6,
+    "movie_id": 3,
+    "year": 1991,
+    "director": "Nia Jones"
+  },
+  {
+    "title": "The Shadow's Symphony",
+    "description": "In a city where shadows have sounds, a detective uses this unique symphony to solve a mysterious disappearance.",
+    "rating": 4.5,
+    "movie_id": 105,
+    "year": 1994,
+    "director": "Kosei Tanaka"
+  },
+  {
+    "title": "Wanderers of the Wasteland",
+    "description": "A post-apocalyptic story where a group of survivors discovers that the wasteland has its own form of life and lore.",
+    "rating": 4.4,
+    "movie_id": 113,
+    "year": 1993,
+    "director": "Anastasia Petrova"
+  },
+  {
+    "title": "Guardians of the Glade",
+    "description": "Forest creatures unite to save their home from industrialists, discovering untapped courage along the way.",
+    "rating": 4.7,
+    "movie_id": 39,
+    "year": 1970,
+    "director": "Haruki Nakamura"
+  },
+  {
+    "title": "Quantum Labyrinth",
+    "description": "A thrilling action-adventure where a group of explorers must navigate a shifting maze of reality to retrieve a powerful artifact before it falls into the wrong hands.",
+    "rating": 4.5,
+    "movie_id": 69,
+    "year": 1989,
+    "director": "Jennifer Carter"
+  },
+  {
+    "title": "Echoes of the Heart",
+    "description": "A heartwarming tale of friendship and self-discovery, Echoes of the Heart follows a group of childhood friends reuniting to fulfill a promise they made long ago.",
+    "rating": 4.5,
+    "movie_id": 24,
+    "year": 1995,
+    "director": "Nathan Foster"
+  },
+  {
+    "title": "Skyward Tales",
+    "description": "Animated tale of young birds trying to discover the secret of flight before their first migration.",
+    "rating": 4.8,
+    "movie_id": 84,
+    "year": 1991,
+    "director": "Hye-jin Park"
+  },
+  {
+    "title": "Midnight Masquerade",
+    "description": "A thriller set in 18th century Venice where masked balls hide more than just faces.",
+    "rating": 4.4,
+    "movie_id": 55,
+    "year": 2007,
+    "director": "Lucia Moretti"
+  },
+  {
+    "title": "Beneath the Blue",
+    "description": "A marine biologist unlocks a mystery from the deep, which changes her perspective on life and love.",
+    "rating": 4.4,
+    "movie_id": 6,
+    "year": 1973,
+    "director": "Miguel Torres"
+  },
+  {
+    "title": "Beneath the Surface",
+    "description": "An oceanographer finds a mysterious civilization during a deep-sea exploration.",
+    "rating": 4.4,
+    "movie_id": 7,
+    "year": 1971,
+    "director": "Michelle Lewis"
+  },
+  {
+    "title": "Symphony of Silence",
+    "description": "A deaf composer struggles to create a symphony that the world will never forget.",
+    "rating": 4.7,
+    "movie_id": 91,
+    "year": 2023,
+    "director": "Patricia Walker"
+  },
+  {
+    "title": "Spaghetti Space-Time",
+    "description": "Two kids accidentally invent a pasta machine that bends time, leading to deliciously wild adventures.",
+    "rating": 4.2,
+    "movie_id": 86,
+    "year": 2014,
+    "director": "Giorgio Bianchi"
+  },
+  {
+    "title": "Ballad of the Lonely Lighthouse",
+    "description": "A reclusive lighthouse keeper's life is illuminated by unexpected friendships, challenging his solitary existence.",
+    "rating": 4.9,
+    "movie_id": 1,
+    "year": 1963,
+    "director": "Dmitri Ivanov"
+  },
+  {
+    "title": "The Enchanted",
+    "description": "An enchanting fantasy adventure following a young hero's quest to rescue a kidnapped princess from a mythical realm filled with magical creatures.",
+    "rating": 4.8,
+    "year": 2014,
+    "movie_id": 97,
+    "director": "Benjamin Thompson"
+  },
+  {
+    "title": "Silent Parade",
+    "description": "A small town's mime troupe inadvertently solves a mystery.",
+    "rating": 4.0,
+    "movie_id": 81,
+    "year": 1978,
+    "director": "Henri Dubois"
+  },
+  {
+    "title": "Isle of Legends",
+    "description": "In a mythical realm of magic and monsters, a young hero sets out on a perilous quest to rescue their kingdom from an ancient curse.",
+    "rating": 4.7,
+    "movie_id": 41,
+    "year": 2006,
+    "director": "Dylan Anderson"
+  },
+  {
+    "title": "Crimson Skies",
+    "description": "A gripping war drama set in a fictional world, where two nations are on the brink of conflict and a group of unlikely heroes must prevent disaster.",
+    "rating": 4.5,
+    "movie_id": 16,
+    "year": 2013,
+    "director": "Jonathan Turner"
+  },
+  {
+    "title": "Endless Corridors",
+    "description": "A janitor in a mysterious facility must find his way out of an ever-changing maze.",
+    "rating": 2.8,
+    "movie_id": 25,
+    "year": 1979,
+    "director": "Alan Green"
+  },
+  {
+    "title": "Quest for Quokka Island",
+    "description": "Kids embark on an adventure to a mythical island to save the world's happiest animal, the Quokka.",
+    "rating": 4.5,
+    "movie_id": 73,
+    "year": 1994,
+    "director": "Lachlan MacKinnon"
+  },
+  {
+    "title": "Beneath Silent Skies",
+    "description": "An astronaut's lone journey on an alien planet, seeking signs of life.",
+    "rating": 4.7,
+    "movie_id": 5,
+    "year": 1977,
+    "director": "Iris Thorne"
+  },
+  {
+    "title": "Peculiar Pet Patisserie",
+    "description": "A quirky baker discovers her pastries give pets human-like qualities, leading to hilarious scenarios.",
+    "rating": 4.5,
+    "movie_id": 67,
+    "year": 2001,
+    "director": "Fiona O'Reilly"
+  },
+  {
+    "title": "Midnight in the Library",
+    "description": "A librarian discovers that characters from the books come alive at night, leading to literary adventures.",
+    "rating": 4.6,
+    "movie_id": 53,
+    "year": 2006,
+    "director": "Chiara Romano"
+  },
+  {
+    "title": "Desert Dance",
+    "description": "A young man's quest to learn a forbidden dance form in a dystopian future.",
+    "rating": 4.5,
+    "movie_id": 18,
+    "year": 2017,
+    "director": "Ahmed Al-Bakri"
+  },
+  {
+    "title": "Eternal Winter",
+    "description": "A scientist tries to stop a second Ice Age while grappling with his own family issues.",
+    "rating": 3.1,
+    "movie_id": 27,
+    "year": 2003,
+    "director": "Laura Gibson"
+  },
+  {
+    "title": "Quantum Quandaries",
+    "description": "A scientist's experiment goes awry, leading to unpredictable mini-black holes popping up everywhere, causing chaos.",
+    "rating": 4.8,
+    "year": 2000,
+    "movie_id": 71,
+    "director": "Radha Krishnan"
+  },
+  {
+    "title": "The Weight of Water",
+    "description": "A sailor faces his past traumas during a solo voyage across the Atlantic.",
+    "rating": 3.7,
+    "movie_id": 107,
+    "year": 1974,
+    "director": "Henry Baker"
+  },
+  {
+    "title": "Timeless Echoes",
+    "description": "A poignant tale of love and loss, Timeless Echoes follows a musician's journey through time to reunite with his lost love and fix the mistakes of the past.",
+    "rating": 4.4,
+    "year": 2018,
+    "movie_id": 111,
+    "director": "Emily Clark"
+  },
+  {
+    "title": "Dance of the Dandelions",
+    "description": "A romance drama about two florists, competing for a royal contract, who end up falling for each other.",
+    "rating": 4.4,
+    "movie_id": 17,
+    "year": 1988,
+    "director": "Emilie Leroux"
+  },
+  {
+    "title": "Mirthful Mountain's Mystery",
+    "description": "A town nestled in the mountains harbors a secret: every full moon, its residents burst into spontaneous, joyful song and dance with comical results.",
+    "rating": 4.5,
+    "movie_id": 57,
+    "year": 1986,
+    "director": "Dragana Vuković"
+  }
+]
