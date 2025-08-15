@@ -1,9 +1,11 @@
 import os
 import json
+import uuid
 import subprocess
 from dotenv import load_dotenv
 
 import weaviate
+import weaviate.classes as wvc
 from weaviate.client import WeaviateClient
 from weaviate.classes.config import Configure
 from weaviate.exceptions import WeaviateBaseError
@@ -35,9 +37,18 @@ def connect_to_demo_db() -> WeaviateClient:
     return client
 
 
+def make_properties(fields):
+    return [
+        wvc.config.Property(name=name, data_type=data_type)
+        for name, data_type in fields
+    ]
+
+
 def upload_to_db(client: WeaviateClient):
-    print("Creating and populating 'Movies' collection...")
     client.collections.delete(name="Movies")
+
+    print("Creating and populating 'Movies' collection...")
+
     movies = client.collections.create(
         name="Movies",
         vector_config=Configure.Vectors.text2vec_huggingface(
@@ -47,37 +58,40 @@ def upload_to_db(client: WeaviateClient):
             project_id=os.getenv("PROJECT_ID"),
             model_id="gemini-2.0-flash",
         ),
+        properties=make_properties(
+            [
+                ("title", wvc.config.DataType.TEXT),
+                ("description", wvc.config.DataType.TEXT),
+                ("rating", wvc.config.DataType.NUMBER),
+                ("movie_id", wvc.config.DataType.INT),
+                ("year", wvc.config.DataType.INT),
+                ("director", wvc.config.DataType.TEXT),
+            ]
+        ),
     )
 
     with open("../movies.json", "r") as f:
-        data = json.load(f)
+        movie_data = json.load(f)
 
-    error_count = 0
-    uploaded_count = 0
+    movie_objs = list()
+    for i, data in enumerate(movie_data):
+        movie_uuid = uuid.uuid4()
+        props = {
+            "title": data["title"],
+            "description": data["description"],
+            "rating": data["rating"],
+            "movie_id": data["movie_id"],
+            "year": data["year"],
+            "director": data["director"],
+        }
 
-    with movies.batch.dynamic() as batch:
-        for d in data:
-            batch.add_object(
-                properties={
-                    "title": d["title"],
-                    "description": d["description"],
-                    "rating": d["rating"],
-                    "movie_id": d["movie_id"],
-                    "year": d["year"],
-                    "director": d["director"],
-                }
-            )
-            if batch.number_errors > error_count:
-                error_count = batch.number_errors
-            else:
-                uploaded_count += 1
+        data_obj = wvc.data.DataObject(
+            uuid=movie_uuid,
+            properties=props,
+        )
+        movie_objs.append(data_obj)
 
-            if error_count > 10:
-                print("Batch import failed — too many errors, stopping.")
-                break
-
-    print(f"Uploaded successfully: {uploaded_count} out of {len(data)}")
-
+    movies.data.insert_many(movie_objs)
     return movies
 
 
