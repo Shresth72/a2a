@@ -1,4 +1,5 @@
 import os
+import json
 import subprocess
 from dotenv import load_dotenv
 
@@ -41,6 +42,14 @@ def main():
         assert client.is_ready()
 
         movies = client.collections.get("Movie")
+
+        docs = movies.query.fetch_objects(limit=100)
+        data = []
+        for obj in docs.objects:
+            data.append(obj.properties)
+        with open("movies.json", "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=4, ensure_ascii=False)
+
         response = movies.query.near_text(query="time travel", limit=1)
         assert len(response.objects) == 1
         print(f"Response: {response.objects}")
