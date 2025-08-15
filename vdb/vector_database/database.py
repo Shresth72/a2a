@@ -31,19 +31,30 @@ class Database:
             assert self.client.is_ready(), "Weaviate client is not ready"
 
     def init_collections(self, collections: List[BaseCollection]):
-        existing = set(self.client.collections.list_all())
+        existing_collections = set(self.client.collections.list_all())
 
         for cls in collections:
-            if cls.__name__ not in existing:
-                print(
-                    f"Collection '{cls.__name__}' missing. Creating and populating..."
-                )
+            collection_name = cls.__name__
+
+            if collection_name in existing_collections:
+                existing_props = self._get_collection_schema(collection_name)
+                new_props = {name: dtype.value for name, dtype in cls.properties}
+
+                if existing_props != new_props and existing_props is not None:
+                    print(
+                        f"Schema change detected for '{collection_name}'. Recreating..."
+                    )
+                    self.client.collections.delete(collection_name)
+                    cls.create(self.client)
+                    cls.populate(self.client)
+                else:
+                    print(
+                        f"Collection '{collection_name}' already exists. Skipping population..."
+                    )
+            else:
+                print(f"Creating and populating: '{collection_name}'...")
                 cls.create(self.client)
                 cls.populate(self.client)
-            else:
-                print(
-                    f"Collection '{cls.__name__}' already exists. Skipping population."
-                )
 
     def query_generate(self, collection_cls: BaseCollection, query, limit, prompt):
         collection = self.client.collections.get(collection_cls.__name__)
@@ -59,6 +70,18 @@ class Database:
             }
             for obj in response.objects
         ]
+
+    def _get_collection_schema(self, collection_name):
+        if self.client:
+            try:
+                config = self.client.collections.get(collection_name).config
+                properties = config.get().properties
+                if not properties:
+                    return None
+                return {prop.name: prop.data_type.value for prop in properties}
+            except Exception:
+                return None
+        return None
 
     def close(self):
         if self.client:

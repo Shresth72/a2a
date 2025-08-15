@@ -1,6 +1,7 @@
 import os
 import json
 import uuid
+import pandas as pd
 
 import weaviate.classes as wvc
 from weaviate.client import WeaviateClient
@@ -10,7 +11,6 @@ import constants
 from utils import make_properties
 
 
-# TODO: Fix inconsistency bw model and data json
 class BaseCollection:
     __name__ = None
     data_file = None
@@ -42,17 +42,23 @@ class BaseCollection:
 
         print(f"Populating collection '{cls.__name__}'...")
         collection = client.collections.get(cls.__name__)
-        with open(cls.data_file, "r") as f:
-            data_list = json.load(f)
 
-        objs = [
-            wvc.data.DataObject(
-                uuid=uuid.uuid4(),
-                properties=data,
+        df = pd.read_csv(cls.data_file)
+        objs = []
+        for _, row in df.iterrows():
+            data = cls.map_row(row)
+            objs.append(
+                wvc.data.DataObject(
+                    uuid=uuid.uuid4(),
+                    properties=data,
+                )
             )
-            for data in data_list
-        ]
+
         collection.data.insert_many(objs)
+
+    @staticmethod
+    def map_row(row):
+        return row.to_dict()
 
 
 class MoviesCollection(BaseCollection):
@@ -65,16 +71,29 @@ class MoviesCollection(BaseCollection):
         ("year", wvc.config.DataType.INT),
         ("director", wvc.config.DataType.TEXT),
     ]
-    data_file = "movies.json"
+    data_file = "movies.csv"
+
+    @staticmethod
+    def map_row(row):
+        return {
+            "title": row["Movie Title"],
+            "description": row["Description"],
+            "rating": float(row["Star Rating"]),
+            "movie_id": int(row["ID"]),
+            "year": int(row["Year"]),
+            "director": row["Director"],
+        }
 
 
 class ReviewsCollection(BaseCollection):
     __name__ = "Reviews"
     properties = [
-        ("review_id", wvc.config.DataType.INT),
-        ("movie_id", wvc.config.DataType.INT),
-        ("review_text", wvc.config.DataType.TEXT),
-        ("reviewer", wvc.config.DataType.TEXT),
-        ("rating", wvc.config.DataType.NUMBER),
+        ("body", wvc.config.DataType.TEXT),
     ]
-    data_file = "reviews.json"
+    data_file = "movies.csv"
+
+    @staticmethod
+    def map_row(row):
+        return {
+            "body": row["Critic Review 1"],
+        }
