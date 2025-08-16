@@ -3,7 +3,7 @@ from weaviate.client import WeaviateClient
 
 import constants
 from typing import List
-from utils import refresh_token
+from utils import refresh_token, _normalize_props
 from models import BaseCollection
 
 
@@ -37,8 +37,12 @@ class Database:
             collection_name = cls.__name__
 
             if collection_name in existing_collections:
-                existing_props = self._get_collection_schema(collection_name)
-                new_props = {name: dtype.value for name, dtype in cls.properties}
+                existing_props = _normalize_props(
+                    self._get_collection_schema(collection_name)
+                )
+                new_props = _normalize_props(
+                    {name: dtype.value for name, dtype in cls.properties}
+                )
 
                 if existing_props != new_props and existing_props is not None:
                     print(

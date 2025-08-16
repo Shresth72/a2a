@@ -12,6 +12,10 @@ def refresh_token() -> str:
     return result.stdout.strip()
 
 
+def _normalize_props(props: dict) -> dict:
+    return {k: str(v).lower().strip() for k, v in props.items()}
+
+
 def make_properties(fields):
     return [
         wvc.config.Property(name=name, data_type=data_type)
