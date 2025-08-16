@@ -19,5 +19,5 @@ def _normalize_props(props: dict) -> dict:
 def make_properties(fields):
     return [
         wvc.config.Property(name=name, data_type=data_type)
-        for name, data_type in fields
+        for name, data_type, *_ in fields
     ]

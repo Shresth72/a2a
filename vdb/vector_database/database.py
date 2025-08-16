@@ -34,15 +34,16 @@ class Database:
         existing_collections = set(self.client.collections.list_all())
 
         for cls in collections:
-            collection_name = cls.__name__
+            collection_name = cls.name
 
             if collection_name in existing_collections:
                 existing_props = _normalize_props(
                     self._get_collection_schema(collection_name)
                 )
                 new_props = _normalize_props(
-                    {name: dtype.value for name, dtype in cls.properties}
+                    {name: dtype.value for name, dtype, *_ in cls.properties}
                 )
+                __import__("ipdb").set_trace()
 
                 if existing_props != new_props and existing_props is not None:
                     print(
@@ -61,7 +62,7 @@ class Database:
                 cls.populate(self.client)
 
     def query_generate(self, collection_cls: BaseCollection, query, limit, prompt):
-        collection = self.client.collections.get(collection_cls.__name__)
+        collection = self.client.collections.get(collection_cls.name)  # updated
         response = collection.generate.near_text(
             query=query,
             limit=limit,

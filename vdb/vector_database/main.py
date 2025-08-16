@@ -12,7 +12,7 @@ def main():
     db = Database()
 
     try:
-        db.init_collections([MoviesCollection, ReviewsCollection])
+        db.init_collections([ReviewsCollection, MoviesCollection])
 
         # results = db.query_generate(
         #     MoviesCollection,
