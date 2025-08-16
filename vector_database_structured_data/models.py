@@ -113,26 +113,15 @@ class SynopsisCollection(BaseCollection):
     properties = [
         ("body", wvc.config.DataType.TEXT, lambda row: row["Synopsis"]),
     ]
-    references = [
-        wvc.config.ReferenceProperty(
-            name="forMovie",
-            target_collection="Movies",
-        )
-    ]
+    references = []
 
     @classmethod
     def build_properties(cls, row):
         props = {name: fn(row) for name, _, fn in cls.properties}
 
-        references = {}
-        movie_title = row.get("Movie Title")
-        if _row_exists(movie_title):
-            references["forMovie"] = generate_uuid5(movie_title.strip())
-
         return {
             "uuid": generate_uuid5(row.get("Synopsis")),
             "properties": props,
-            "references": references or None,
         }
 
 
@@ -164,23 +153,21 @@ class MoviesCollection(BaseCollection):
         references = {}
 
         synopsis_text = row.get("Synopsis")
-        synopsis_uuid = None
         if _row_exists(synopsis_text):
-            synopsis_uuid = generate_uuid5(synopsis_text.strip())
-            references["hasSynopsis"] = synopsis_uuid
+            references["hasSynopsis"] = generate_uuid5(synopsis_text.strip())
+        else:
+            references["hasSynopsis"] = None
 
         review_uuids = []
         for c in [1, 2, 3]:
             col = f"Critic Review {c}"
             text = row.get(col)
-
             if _row_exists(text):
                 review_uuids.append(generate_uuid5(text.strip()))
-        if review_uuids:
-            references["hasReviews"] = review_uuids
+        references["hasReviews"] = review_uuids or None
 
         return {
             "uuid": generate_uuid5(row.get("Movie Title")),
             "properties": props,
-            "references": references or None,
+            "references": references,
         }
