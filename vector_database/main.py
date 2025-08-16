@@ -14,17 +14,17 @@ def main():
     try:
         db.init_collections([ReviewsCollection, MoviesCollection])
 
-        # results = db.query_generate(
-        #     MoviesCollection,
-        #     query="stellar",
-        #     limit=1,
-        #     prompt="""
-        #         Summarize the description:
-        #         {description} for this movie {title}.
-        #         """,
-        # )
-        # for r in results:
-        #     print(f"{r['generated']}\n")
+        results = db.query_generate(
+            MoviesCollection,
+            query="stellar",
+            limit=1,
+            prompt="""
+                Summarize the description:
+                {description} for this movie {title}.
+                """,
+        )
+        for r in results:
+            print(f"{r['generated']}\n")
     except WeaviateBaseError as e:
         print(f"Weaviate error occured: {e}")
     finally:

@@ -30,6 +30,9 @@ def connect_to_db() -> WeaviateClient:
         cluster_url=os.getenv("WEAVIATE_URL"),
         auth_credentials=weaviate.auth.AuthApiKey(os.getenv("WEAVIATE_API_KEY")),
         headers={
+            # "X-Openai-Api-Key": os.getenv("OPENAI_APIKEY"),
+            # "X-Goog-Studio-Api-Key": os.getenv("GOOGLE_APIKEY"),
+            # "X-Goog-Vertex-Api-Key": os.getenv("GOOGLE_APPLICATION_CREDENTIALS"),
             "X-HuggingFace-Api-Key": os.getenv("HF_API_KEY"),
             "X-Goog-Vertex-Api-Key": token,
         },

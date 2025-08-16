@@ -1,0 +1,5 @@
+weaviate-client
+pandas
+python-dotenv
+streamlit
+ipdb
