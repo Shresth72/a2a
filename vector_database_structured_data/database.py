@@ -32,33 +32,31 @@ class Database:
 
     def init_collections(self, collections: List[BaseCollection]):
         existing_collections = set(self.client.collections.list_all())
+        recreated = {}
 
         for cls in collections:
             collection_name = cls.name
 
             if collection_name in existing_collections:
-                existing_props = _normalize_props(
-                    self._get_collection_schema(collection_name)
-                )
-                new_props = _normalize_props(
-                    {name: dtype.value for name, dtype, *_ in cls.properties}
-                )
-                __import__("ipdb").set_trace()
-
-                if existing_props != new_props and existing_props is not None:
-                    print(
-                        f"Schema change detected for '{collection_name}'. Recreating..."
-                    )
+                if self._should_recreate_collection(cls):
+                    print(f"Schema change detected for '{collection_name}'. Recreating...")
                     self.client.collections.delete(collection_name)
                     cls.create(self.client)
-                    cls.populate(self.client)
+                    recreated[collection_name] = True
                 else:
-                    print(
-                        f"Collection '{collection_name}' already exists. Skipping population..."
-                    )
+                    print(f"Collection '{collection_name}' already exists")
+                    recreated[collection_name] = False
             else:
-                print(f"Creating and populating: '{collection_name}'...")
+                print(f"Creating collection: '{collection_name}'...")
                 cls.create(self.client)
+                recreated[collection_name] = True
+
+        for cls in collections:
+            if recreated[cls.name] or self._should_add_references(cls):
+                cls.add_references(self.client)
+
+        for cls in collections:
+            if recreated[cls.name] or self._should_add_references(cls) or self._should_populate_collection(cls):
                 cls.populate(self.client)
 
     def query_generate(self, collection_cls: BaseCollection, query, limit, prompt):
@@ -75,6 +73,42 @@ class Database:
             }
             for obj in response.objects
         ]
+
+    def _should_recreate_collection(self, cls: BaseCollection) -> bool:
+        existing_props = _normalize_props(
+            self._get_collection_schema(cls.name)
+        )
+        new_props = _normalize_props(
+            {name: dtype.value for name, dtype, *_ in cls.properties}
+        )
+        return existing_props is not None and existing_props != new_props
+
+    def _should_add_references(self, cls: BaseCollection) -> bool:
+        if not cls.references:
+            return False
+
+        try:
+            config = self.client.collections.get(cls.name).config.get()
+            existing_refs = _normalize_props(
+                {ref.name: ref.target_collections for ref in (config.references or [])}
+            )
+            new_refs = _normalize_props(
+                {ref.name: [ref.target_collection] for ref in cls.references}
+            )
+            return existing_refs != new_refs
+        except Exception:
+            return True
+
+    def _should_populate_collection(self, cls: BaseCollection) -> bool:
+        if not cls.data_file:
+            return False
+
+        try:
+            collection = self.client.collections.get(cls.name)
+            response = collection.aggregate.over_all(total_count=True)
+            return response.total_count == 0
+        except Exception:
+            return True
 
     def _get_collection_schema(self, collection_name):
         if self.client:

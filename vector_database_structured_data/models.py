@@ -1,5 +1,4 @@
 import os
-import uuid
 import pandas as pd
 from abc import ABC, abstractmethod
 
@@ -8,14 +7,14 @@ from weaviate.client import WeaviateClient
 from weaviate.classes.config import Configure
 
 import constants
-from utils import make_properties
+from utils import make_properties, generate_uuid5, _row_exists
 
 
 class BaseCollection(ABC):
     name = None
     data_file = None
     properties = []
-    references = None
+    references = []
 
     vector_config = Configure.Vectors.text2vec_huggingface(
         model=constants.HF_MODEL,
@@ -33,13 +32,24 @@ class BaseCollection(ABC):
             vector_config=cls.vector_config,
             generative_config=cls.generative_config,
             properties=make_properties(cls.properties),
-            references=cls.references,
         )
 
     @classmethod
     @abstractmethod
     def build_properties(cls, row):
         raise NotImplementedError
+
+    @classmethod
+    def add_references(cls, client: WeaviateClient):
+        if not cls.references:
+            return
+        collection = client.collections.get(cls.name)
+
+        for reference in cls.references:
+            try:
+                collection.config.add_reference(reference)
+            except Exception as e:
+                print(f"Warning: Could not add reference {reference.name}: {e}")
 
     @classmethod
     def populate(cls, client: WeaviateClient):
@@ -68,6 +78,8 @@ class BaseCollection(ABC):
 
         if objs:
             collection.data.insert_many(objs)
+        else:
+            print(f"No objects to insert into '{cls.name}'")
 
 
 class ReviewsCollection(BaseCollection):
@@ -76,6 +88,7 @@ class ReviewsCollection(BaseCollection):
     properties = [
         ("body", wvc.config.DataType.TEXT, None),
     ]
+    references = []
 
     @classmethod
     def build_properties(cls, row):
@@ -84,8 +97,8 @@ class ReviewsCollection(BaseCollection):
             col = f"Critic Review {c}"
             text = row.get(col)
 
-            if pd.notna(text) and str(text).strip():
-                review_uuid = uuid.uuid5(constants.NAMESPACE, text.strip())
+            if _row_exists(text):
+                review_uuid = generate_uuid5(text.strip())
                 objs.append(
                     {
                         "uuid": review_uuid,
@@ -93,6 +106,34 @@ class ReviewsCollection(BaseCollection):
                     }
                 )
         return objs
+
+class SynopsisCollection(BaseCollection):
+    name = "Synopsis"
+    data_file = "movies.csv"
+    properties = [
+        ("body", wvc.config.DataType.TEXT, lambda row: row["Synopsis"]),
+    ]
+    references = [
+        wvc.config.ReferenceProperty(
+            name="forMovie",
+            target_collection="Movies",
+        )
+    ]
+
+    @classmethod
+    def build_properties(cls, row):
+        props = {name: fn(row) for name, _, fn in cls.properties}
+
+        references = {}
+        movie_title = row.get("Movie Title")
+        if _row_exists(movie_title):
+            references["forMovie"] = generate_uuid5(movie_title.strip())
+
+        return {
+            "uuid": generate_uuid5(row.get("Synopsis")),
+            "properties": props,
+            "references": references or None,
+        }
 
 
 class MoviesCollection(BaseCollection):
@@ -108,25 +149,38 @@ class MoviesCollection(BaseCollection):
     ]
     references = [
         wvc.config.ReferenceProperty(
-            name="hasReview",
+            name="hasReviews",
             target_collection=ReviewsCollection.name,
-        )
+        ),
+        wvc.config.ReferenceProperty(
+            name="hasSynopsis",
+            target_collection=SynopsisCollection.name,
+        ),
     ]
 
     @classmethod
     def build_properties(cls, row):
         props = {name: fn(row) for name, _, fn in cls.properties}
+        references = {}
+
+        synopsis_text = row.get("Synopsis")
+        synopsis_uuid = None
+        if _row_exists(synopsis_text):
+            synopsis_uuid = generate_uuid5(synopsis_text.strip())
+            references["hasSynopsis"] = synopsis_uuid
 
         review_uuids = []
         for c in [1, 2, 3]:
             col = f"Critic Review {c}"
             text = row.get(col)
 
-            if pd.notna(text) and str(text).strip():
-                review_uuids.append(uuid.uuid5(constants.NAMESPACE, text.strip()))
+            if _row_exists(text):
+                review_uuids.append(generate_uuid5(text.strip()))
+        if review_uuids:
+            references["hasReviews"] = review_uuids
 
         return {
-            "uuid": uuid.uuid4(),
+            "uuid": generate_uuid5(row.get("Movie Title")),
             "properties": props,
-            "references": {"hasReview": review_uuids} if review_uuids else None,
+            "references": references or None,
         }

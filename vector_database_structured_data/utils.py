@@ -1,5 +1,8 @@
+import uuid
 import subprocess
+import pandas as pd
 import weaviate.classes as wvc
+from constants import NAMESPACE
 
 
 def refresh_token() -> str:
@@ -10,6 +13,15 @@ def refresh_token() -> str:
         print(f"Error refreshing token: {result.stderr}")
         return None
     return result.stdout.strip()
+
+
+def generate_uuid5(value):
+    return uuid.uuid5(NAMESPACE, value)
+
+
+def _row_exists(value):
+    if pd.notna(value) and str(value).strip():
+        return True
 
 
 def _normalize_props(props: dict) -> dict:
