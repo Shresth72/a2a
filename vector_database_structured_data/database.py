@@ -30,6 +30,40 @@ class Database:
             )
             assert self.client.is_ready(), "Weaviate client is not ready"
 
+    def fetch_objects(self, collection_cls: BaseCollection, filters, limit, ref):
+        collection = self.client.collections.get(collection_cls.name)  # updated
+        return collection.query.fetch_objects(
+            filters=filters,
+            limit=limit,
+            return_references=ref,
+        )
+
+    def fetch_objects_by_id(self, collection_cls: BaseCollection, cid, ref):
+        collection = self.client.collections.get(collection_cls.name)  # updated
+        return collection.query.fetch_object_by_id(
+            uuid=cid,
+            return_references=ref
+        )
+
+    def query_generate(self, collection_cls: BaseCollection, query, filters, limit, ref):
+        collection = self.client.collections.get(collection_cls.name)  # updated
+        return collection.generate.near_text(
+            query=query,
+            filters=filters,
+            limit=limit,
+            return_references=ref,
+        )
+
+    def query_hybrid(self, collection_cls: BaseCollection, query, filters, limit, alpha, ref):
+        collection = self.client.collections.get(collection_cls.name)  # updated
+        return collection.query.hybrid(
+            query=query,
+            filters=filters,
+            limit=limit,
+            alpha=alpha,
+            return_references=ref,
+        )
+
     def init_collections(self, collections: List[BaseCollection]):
         existing_collections = set(self.client.collections.list_all())
         recreated = {}
@@ -58,21 +92,6 @@ class Database:
         for cls in collections:
             if recreated[cls.name] or self._should_add_references(cls) or self._should_populate_collection(cls):
                 cls.populate(self.client)
-
-    def query_generate(self, collection_cls: BaseCollection, query, limit, prompt):
-        collection = self.client.collections.get(collection_cls.name)  # updated
-        response = collection.generate.near_text(
-            query=query,
-            limit=limit,
-            single_prompt=prompt,
-        )
-
-        return [
-            {
-                "generated": obj.generated,
-            }
-            for obj in response.objects
-        ]
 
     def _should_recreate_collection(self, cls: BaseCollection) -> bool:
         existing_props = _normalize_props(

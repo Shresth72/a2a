@@ -113,15 +113,28 @@ class SynopsisCollection(BaseCollection):
     properties = [
         ("body", wvc.config.DataType.TEXT, lambda row: row["Synopsis"]),
     ]
-    references = []
+    references = [
+        wvc.config.ReferenceProperty(
+            name="forMovie",
+            target_collection="Movies",
+        ),
+    ]
 
     @classmethod
     def build_properties(cls, row):
         props = {name: fn(row) for name, _, fn in cls.properties}
 
+        references = {}
+        movie_id = row.get("ID")
+        if _row_exists(movie_id):
+            references["forMovie"] = generate_uuid5(movie_id)
+        else:
+            references["forMovie"] = None
+
         return {
             "uuid": generate_uuid5(row.get("Synopsis")),
             "properties": props,
+            "references": references,
         }
 
 
@@ -167,7 +180,7 @@ class MoviesCollection(BaseCollection):
         references["hasReviews"] = review_uuids or None
 
         return {
-            "uuid": generate_uuid5(row.get("Movie Title")),
+            "uuid": generate_uuid5(row.get("ID")),
             "properties": props,
             "references": references,
         }

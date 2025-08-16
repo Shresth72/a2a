@@ -16,7 +16,7 @@ def refresh_token() -> str:
 
 
 def generate_uuid5(value):
-    return uuid.uuid5(NAMESPACE, value)
+    return uuid.uuid5(NAMESPACE, str(value))
 
 
 def _row_exists(value):
